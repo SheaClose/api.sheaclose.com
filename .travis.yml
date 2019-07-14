@@ -5,6 +5,7 @@ node_js:
   - "8"
 install:
   - npm i
+  - pip install awscli --upgrade --user
 script:
   - aws s3 cp s3://api-sheaclose.com/.env/serverConfig.js ./
 before_deploy:
