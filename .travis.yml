@@ -9,7 +9,7 @@ install:
 script:
   - aws s3 cp s3://api-sheaclose.com/.env/serverConfig.js ./
 before_deploy:
-  - git add serverConfig.js
+  - git add serverConfig.js -f
   - git commit -m 'adding serverConfig.js'
 deploy:
   provider: elasticbeanstalk
