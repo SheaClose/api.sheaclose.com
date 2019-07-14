@@ -1,0 +1,25 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+  - "8"
+install:
+  - npm i
+script:
+  - aws s3 cp s3://api-sheaclose.com/.env/serverConfig.js ./
+before_deploy:
+  - git add serverConfig.js
+  - git commit -m 'adding serverConfig.js'
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: "$AWS_ACCESS_KEY_ID"
+  secret_access_key:
+    secure: "$AWS_SECRET_ACCESS_KEY"
+  region: us-east-1
+  app: api-sheaclose
+  env: api-sheaclose
+  bucket_name: api-sheaclose.com
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH =~ master$"
